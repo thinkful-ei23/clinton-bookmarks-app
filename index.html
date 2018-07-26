@@ -25,10 +25,48 @@
   </header>
 
   <main class="grid" role="main">
-    <aside class="sidebar column">sidebar</aside>
+    <aside class="column" name="sidebar">
+      <section class="add-panel" role="region">
+        <header class="add-header js-add-col" style="cursor: pointer;">
+          <span class="side-title">new book.mark</span>
+        </header>
+      </section>
+
+      <section class="filter-panel" role="region">
+        <header class="filter-header js-filter-col" style="cursor: pointer;">
+          <span class="side-title">filter book.marks</span>
+        </header>
+      </section>
+    </aside>
     
-    <section class="bookmarks bigger column" role="region">
-      <ul class="js-bookmarks grid">bookmarks list</ul>
+    <section class="bigger column" role="region">
+      <ul class="bookmarks js-bookmarks">
+        <li>
+          <article class="bookmark">
+            <header class="bookmark-header js-bookmark-exp" style="cursor: pointer;">
+              <span class="bookmark-title">Article on Dogs</span>
+              <img class="bookmark-rating" src="/img/5star.png" alt="5 stars">
+            </header>
+            <section class="bookmark-info" role="region">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima doloribus voluptate, aut modi magnam corrupti recusandae omnis odit, laborum, quia aliquid distinctio temporibus dolores repellat harum corporis sit numquam optio?</p>
+              <a class="delete-button js-delete-button" href="#">delete</a>
+              <a class="js-visit-url" href="http://www.dogs.com">
+                <div class="visit-button">
+                  <span class="visit-url">visit site</span>
+                </div>
+              </a>
+            </section>
+          </article>
+        </li>
+        <li>
+            <article class="bookmark">
+              <header class="bookmark-header js-bookmark-col" style="cursor: pointer;">
+                <span class="bookmark-title">Article on Cats</span>
+                <img class="bookmark-rating" src="/img/3star.png" alt="3 stars">
+              </header>
+            </article>
+          </li>
+      </ul>
     </section>
   </main>
 

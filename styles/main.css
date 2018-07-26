@@ -4,18 +4,29 @@
 }
 
 body {
+  background-color: #e8e9eb;
   height: 100%;
   overflow: hidden;
 }
 
 h1 {
   color: white;
-  font-size: 48px;
+  font-size: 54px;
   margin: 0px;
-  margin-bottom: -11px;
+  margin-bottom: -12px;
   margin-left: -4px;
   position: absolute;
   bottom: 0px;
+}
+
+main {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+aside {
+  background-color: #ecdecc;
 }
 
 .banner {
@@ -28,6 +39,7 @@ h1 {
 }
 
 .search {
+  background-color: white;
   height: 44px;
   margin-top: 80px;
 }
@@ -46,15 +58,122 @@ h1 {
   height: 100%;
   margin: auto;
   outline: none;
-  /* text-align: center; */
-  width: auto;
+  text-align: center;
+  width: 100%;
+}
+
+.add-header {
+  background-color: #8b848b;
+  bottom: 0px;
+  height: 45px;
+  left: 0px;
+  position: relative;
+}
+
+.filter-header {
+  background-color: #bbc8d7;
+  bottom: 0px;
+  height: 45px;
+  left: 0px;
+  position: relative;
+}
+
+.side-title {
+  bottom: -6px;
+  color: white;
+  display: inline-block;
+  font-size: 32px;
+  font-weight: bold;
+  left: -1px;
+  overflow: hidden;
+  position: absolute;
 }
 
 .bookmarks {
-  background-color: #e8e9eb;
+  background-color: #ecdecc;
   height: 100vh;
+  margin: 0px;
+  padding: 15px;
+  width: 100%;
 }
 
-.bookmarks ul {
-  padding: 0px;
+.bookmarks li {
+  list-style-type: none;
+  margin-bottom: 15px;
+}
+
+.bookmark {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.bookmark-header {
+  background-color: #db7676;
+  bottom: 0px;
+  height: 30px;
+  left: 0px;
+  position: relative;
+}
+
+.bookmark-title {
+  color: white;
+  display: inline-block;
+  font-size: 24px;
+  left: 4px;
+  overflow: hidden;
+  position: absolute;
+  top: 3px;
+}
+
+.bookmark-rating {
+  bottom: 0px;
+  display: inline-block;
+  right: 0px;
+  position: absolute;
+}
+
+.bookmark-info {
+  background-color: white;
+  height: auto;
+  padding: 10px;
+}
+
+.bookmark-info p {
+  margin: 0px;
+  margin-bottom: 10px;
+}
+
+.bookmark-info a {
+  text-decoration: none;
+}
+
+.visit-button {
+  background-color: #8b848b;
+  height: 30px;
+  overflow: hidden;
+  position: relative;
+}
+
+.visit-url {
+  bottom: -6px;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  left: 0px;
+  position: absolute;
+  width: 100%;
+}
+
+.delete-button {
+  background-color: #8b848b;
+  color: white;
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  height: 30px;
+  line-height: 1.84em;
+  margin-left: 10px;
+  text-align: right;
+  width: 100px;
 }
