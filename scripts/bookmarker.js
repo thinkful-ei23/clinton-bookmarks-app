@@ -19,10 +19,10 @@ const bookmarker = (function() {
       return `
       <li bookmark-id="${item.id}">
         <article class="bookmark">
-          <header class="bookmark-header js-bookmark" style="cursor: pointer;">
+          <button aria-label="Bookmark: ${item.title}" class="bookmark-header js-bookmark" tabindex="0">
             <span class="bookmark-title">${item.title}</span>
             <img class="bookmark-rating" src="img/${stars}.png" alt="${item.rating} stars">
-          </header>
+          </button>
         </article>
       </li>
       `;
@@ -30,18 +30,17 @@ const bookmarker = (function() {
       return `
       <li bookmark-id="${item.id}">
         <article class="bookmark">
-          <header class="bookmark-header js-bookmark" style="cursor: pointer;">
+          <button aria-label="Bookmark: ${item.title}" class="bookmark-header js-bookmark" tabindex="0">
             <span class="bookmark-title">${item.title}</span>
             <img class="bookmark-rating" src="img/${stars}.png" alt="${item.rating} stars">
-          </header>
+          </button>
           <section class="bookmark-info" role="region">
             <p>${item.desc}</p>
-            <a class="delete-button js-delete-button" href="#">delete</a>
-            <a class="js-visit-url" href="${item.url}" target="_blank">
-              <div class="visit-button">
-                <span class="visit-url">visit site</span>
-              </div>
-            </a>
+            <button class="delete-button js-delete-button">delete</button>
+            <div class="visit-button">
+              <input type="button" onclick="window.open('${item.url}', '_blank');" target="_blank" value="visit site" class="visit-url">
+            </div>
+            </input>
           </section>
         </article>
       </li>
@@ -74,17 +73,18 @@ const bookmarker = (function() {
   function generateAddPanel() {
     if (store.newExpanded) {
       return `
-        <header class="add-header js-add" style="cursor: pointer;">
+        <button aria-label="new bookmark" class="add-header js-add" style="cursor: pointer;" tabindex="0">
           <span class="side-title">new book.mark</span>
-        </header>
+        </button>
         <form id="add-bookmark">
-          <label hidden for="bookmark-title">Title</label>
+          <label for="bookmark-title">Title</label>
           <input type="text" name="title" id="bookmark-title" placeholder="Title" required>
-          <label hidden for="bookmark-url">URL</label>
+          <label for="bookmark-url">URL</label>
           <input type="url" name="url" id="bookmark-url" placeholder="URL" required>
-          <label hidden for="bookmark-desc">Description</label>
+          <label for="bookmark-desc">Description</label>
           <input type="text" name="desc" id="bookmark-desc" placeholder="Description">
-          <select name="rating" class="select-rating">
+          <label for="select-rating">Select Rating</label>
+          <select name="rating" id="select-rating">
             <option value="" disabled selected>Rating</option>
             <option value="5star">5 stars</option>
             <option value="4star">4 stars</option>
@@ -97,9 +97,9 @@ const bookmarker = (function() {
       `;
     } else {
       return `
-      <header class="add-header js-add" style="cursor: pointer;">
+      <button aria-label="new bookmark" class="add-header js-add" style="cursor: pointer;" tabindex="0">
         <span class="side-title">new book.mark</span>
-      </header>
+      </button>
       `;
     }
   }
@@ -130,12 +130,13 @@ const bookmarker = (function() {
 
     if (store.filterExpanded) {
       return `
-      <header class="filter-header js-filter" style="cursor: pointer;">
+      <button aria-label="filter bookmarks" class="filter-header js-filter" style="cursor: pointer;" tabindex="0">
         <span class="side-title">filter book.marks</span>
-      </header>
+      </button>
+      <div class="no-gap"></div>
       <form id="filter-form">
         <label for="min-rating">minimum rating:</label>
-        <select name="rating" class="select-rating js-select-rating">
+        <select name="rating" id="min-rating" class="select-rating js-select-rating">
           <option value="0" ${select0}>select</option>
           <option value="5" ${select5}>5 stars</option>
           <option value="4" ${select4}>4 stars</option>
@@ -143,11 +144,11 @@ const bookmarker = (function() {
           <option value="2" ${select2}>2 stars</option>
           <option value="1" ${select1}>1 star</option>
         </select>
-        <label hidden for="select-sort">sort bookmarks</label>
-        <select name="sort" class="select-rating js-select-sort">
-          <option value="newest">sort</option>
+        <label for="select-sort">sort bookmarks by:</label>
+        <select name="sort" id="select-sort" class="select-rating js-select-sort">
+          <option value="newest">select</option>
           <option value="alpha">alphabetical</option>
-          <option value="rating">by rating</option>
+          <option value="rating">rating</option>
           <option value="newest">newest first</option>
           <option value="oldest">oldest first</option>
         </select>
@@ -155,9 +156,9 @@ const bookmarker = (function() {
       `;
     } else {
       return `
-      <header class="filter-header js-filter" style="cursor: pointer;">
+      <button aria-label="filter bookmarks" class="filter-header js-filter" style="cursor: pointer;" tabindex="0">
         <span class="side-title">filter book.marks</span>
-      </header>
+      </button>
       `;
     }
   }

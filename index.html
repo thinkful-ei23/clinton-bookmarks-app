@@ -19,21 +19,21 @@
     
     <section class="search" role="region">
       <form class="js-search" action="#">
-        <label hidden for="search-bar">Search Bar</label>
-        <input class="js-search-bar" type="text" name="search-bar" id="search-bar" placeholder=" search book.marks" autofocus>
+        <label for="search-bar">Search Bar</label>
+        <input aria-label="search bookmarks" class="js-search-bar" type="text" name="search-bar" id="search-bar" placeholder=" search book.marks" autofocus>
       </form>
     </section>
   </header>
 
   <main class="grid" role="main">
-    <aside class="column" name="sidebar">
+    <aside aria-label="sidebar" class="column" name="sidebar">
       <section class="add-panel js-add-panel" role="region"></section>
 
       <section class="filter-panel js-filter-panel" role="region"></section>
     </aside>
     
     <section class="bigger column" role="region">
-      <ul class="bookmarks js-bookmarks"></ul>
+      <ul aria-label="bookmark list" class="bookmarks js-bookmarks"></ul>
     </section>
   </main>
 

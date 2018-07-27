@@ -27,6 +27,11 @@ main {
 
 aside {
   background-color: #ecdecc;
+  /* font-size: 0px; */
+}
+
+.no-gap {
+  font-size: 0px;
 }
 
 .banner {
@@ -49,6 +54,13 @@ aside {
   width: 100%;
 }
 
+.search label {
+  font-size: 0px;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+}
+
 .search input {
   border: none;
   color: #8b848b;
@@ -64,17 +76,26 @@ aside {
 
 .add-header {
   background-color: #8b848b;
+  border: none;
   bottom: 0px;
   height: 45px;
   left: 0px;
   position: relative;
+  width: 100%;
+}
+
+.add-panel label {
+  font-size: 0px;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
 }
 
 #add-bookmark {
   background-color: white;
-  /* margin-bottom: 30px; */
+  margin-top: -2px;
   padding: 10px;
-  padding-bottom: 30px;
+  padding-bottom: 32px;
   width: 100%;
 }
 
@@ -94,6 +115,7 @@ aside {
   font-size: 24px;
   font-weight: bold;
   height: 30px;
+  margin-right: -10px;
   padding-bottom: 0px;
   padding-right: 0px;
   padding-top: 9px;
@@ -107,15 +129,18 @@ aside {
 
 .filter-header {
   background-color: #bbc8d7;
+  border: none;
   bottom: 0px;
   height: 45px;
   left: 0px;
+  margin-top: -2px;
   position: relative;
+  width: 100%;
 }
 
 #filter-form {
   background-color: white;
-  /* margin-bottom: 30px; */
+  margin-top: -2px;
   padding: 10px;
   padding-bottom: 0px;
   width: 100%;
@@ -160,10 +185,13 @@ aside {
 
 .bookmark-header {
   background-color: #db7676;
+  border: none;
   bottom: 0px;
+  cursor: pointer;
   height: 30px;
   left: 0px;
   position: relative;
+  width: 100%;
 }
 
 .bookmark-title {
@@ -171,6 +199,7 @@ aside {
   display: inline-block;
   font-size: 24px;
   left: 4px;
+  margin: 0px;
   overflow: hidden;
   position: absolute;
   top: 3px;
@@ -186,6 +215,7 @@ aside {
 .bookmark-info {
   background-color: white;
   height: auto;
+  margin-top: -2px;
   padding: 10px;
 }
 
@@ -206,24 +236,32 @@ aside {
 }
 
 .visit-url {
-  bottom: -6px;
+  background: none;
+  border: none;
+  /* bottom: -6px; */
   color: white;
   font-size: 24px;
   font-weight: bold;
+  height: 100%;
   left: 0px;
+  line-height: 44px;
+  padding: 0px;
   position: absolute;
+  text-align: left;
   width: 100%;
 }
 
 .delete-button {
   background-color: #8b848b;
+  border: none;
   color: white;
   float: right;
   font-size: 24px;
   font-weight: bold;
   height: 30px;
-  line-height: 1.84em;
+  line-height: 44px;
   margin-left: 10px;
+  padding: 0px;
   text-align: right;
   width: 100px;
 }
