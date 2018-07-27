@@ -1,6 +1,8 @@
 'use strict';
-/* global $ */
+/* eslint-disable no-unused-vars, no-console */
+/* global $, bookmarker */
 
-$(function() {
-  
+$(document).ready(function() {
+  bookmarker.bindEventListeners();
+  bookmarker.render();
 });
