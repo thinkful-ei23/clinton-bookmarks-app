@@ -105,23 +105,46 @@ const bookmarker = (function() {
   }
 
   function generateFilterPanel() {
-    if (store.filterExpanded === true) {
+    let select0, select1, select2, select3, select4, select5;
+    select0 = select1 = select2 = select3 = select4 = select5 = '';
+    switch(store.minRating) {
+    case 0:
+      select0 = 'selected';
+      break;
+    case 1:
+      select1 = 'selected';
+      break;
+    case 2:
+      select2 = 'selected';
+      break;
+    case 3:
+      select3 = 'selected';
+      break;
+    case 4:
+      select4 = 'selected';
+      break;
+    case 5:
+      select5 = 'selected';
+      break;
+    }
+
+    if (store.filterExpanded) {
       return `
       <header class="filter-header js-filter" style="cursor: pointer;">
         <span class="side-title">filter book.marks</span>
       </header>
       <form id="filter-form">
-        <label hidden for="min-rating">minimum Rating</label>
-        <select name="rating" class="select-rating">
-          <option value="1star">minimum rating</option>
-          <option value="5star">5 stars</option>
-          <option value="4star">4 stars</option>
-          <option value="3star">3 stars</option>
-          <option value="2star">2 stars</option>
-          <option value="1star">1 star</option>
+        <label for="min-rating">minimum rating:</label>
+        <select name="rating" class="select-rating js-select-rating">
+          <option value="0" ${select0}>select</option>
+          <option value="5" ${select5}>5 stars</option>
+          <option value="4" ${select4}>4 stars</option>
+          <option value="3" ${select3}>3 stars</option>
+          <option value="2" ${select2}>2 stars</option>
+          <option value="1" ${select1}>1 star</option>
         </select>
         <label hidden for="select-sort">sort bookmarks</label>
-        <select name="sort" class="select-rating">
+        <select name="sort" class="select-rating js-select-sort">
           <option value="newest">sort</option>
           <option value="alpha">alphabetical</option>
           <option value="rating">by rating</option>
@@ -139,14 +162,35 @@ const bookmarker = (function() {
     }
   }
 
+  // function (item) {
+  //   switch (item.rating) {
+  //   case 5:
+  //     return '5star';
+  //   case 4:
+  //     return '4star';
+  //   case 3:
+  //     return '3star';
+  //   case 2:
+  //     return '2star';
+  //   case 1:
+  //     return '1star';
+  //   default:
+  //     return 'no-star';
+  //   }
+  // }
+
   function render() {
     let items = store.items;
 
-    $('.js-add-panel').html(generateAddPanel());
-    $('.js-filter-panel').html(generateFilterPanel());
+    if (store.minRating > 1) {
+      items = items.filter(item => item.rating >= store.minRating);
+    }
 
     const bookmarksString = generateBookmarksString(items);
     $('.js-bookmarks').html(bookmarksString);
+
+    $('.js-add-panel').html(generateAddPanel());
+    $('.js-filter-panel').html(generateFilterPanel());
   }
 
   function getItemIdFromElement(item) {
@@ -159,9 +203,6 @@ const bookmarker = (function() {
     $('.add-panel').on('submit', '#add-bookmark', function(event) {
       event.preventDefault();
       const newData = $(event.target).serializeJson();
-      $(':input', '#add-bookmark')
-        .val('')
-        .removeAttr('selected');
       api.createBookmark(newData, (newBookmark) => {
         store.addBookmark(newBookmark);
         render();
@@ -205,6 +246,14 @@ const bookmarker = (function() {
       render();
     });
   }
+
+  function handleRatingFilterSelect() {
+    $('.js-filter-panel').on('change', '.js-select-rating', function() {
+      const rating = Number($('.js-select-rating').val());
+      store.minRating = rating;
+      render();
+    });
+  }
   
   function bindEventListeners() {
     handleNewBookmarkSubmit();
@@ -212,6 +261,7 @@ const bookmarker = (function() {
     handleBookmarkToggle();
     handleAddPanelToggle();
     handleFilterPanelToggle();
+    handleRatingFilterSelect();
   }
 
   return { render, bindEventListeners };
