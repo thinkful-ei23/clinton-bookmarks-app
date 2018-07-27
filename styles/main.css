@@ -70,12 +70,62 @@ aside {
   position: relative;
 }
 
+#add-bookmark {
+  background-color: white;
+  /* margin-bottom: 30px; */
+  padding: 10px;
+  padding-bottom: 30px;
+  width: 100%;
+}
+
+#add-bookmark input, select {
+  border: 1px solid #8b848b;
+  margin-bottom: 10px;
+  padding: 6px;
+  width: 100%;
+}
+
+.bookmark-submit {
+  background: none;
+  background-color: #db7676;
+  border: none;
+  color: white;
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  height: 30px;
+  padding-bottom: 0px;
+  padding-right: 0px;
+  padding-top: 9px;
+  text-align: right;
+  width: 80px;
+}
+
+.filter-panel {
+  clear: right;
+}
+
 .filter-header {
   background-color: #bbc8d7;
   bottom: 0px;
   height: 45px;
   left: 0px;
   position: relative;
+}
+
+#filter-form {
+  background-color: white;
+  /* margin-bottom: 30px; */
+  padding: 10px;
+  padding-bottom: 0px;
+  width: 100%;
+}
+
+#filter-form select {
+  border: 1px solid #8b848b;
+  margin-bottom: 10px;
+  padding: 6px;
+  width: 100%;
 }
 
 .side-title {

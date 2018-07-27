@@ -1,6 +1,6 @@
 'use strict';
 /* eslint-disable no-unused-vars, no-console */
-/* global $, bookmarker */
+/* global $, bookmarker, store, Item */
 
 $(document).ready(function() {
   bookmarker.bindEventListeners();
