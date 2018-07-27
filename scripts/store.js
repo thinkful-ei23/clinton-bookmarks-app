@@ -58,10 +58,7 @@ const store = (function() {
     filterSort: 'newest',
     minRating: 0,
     errorMsg: null,
-    items: [
-      {id:123, title:'Article on Dogs', desc:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima doloribus voluptate, aut modi magnam corrupti recusandae omnis odit, laborum, quia aliquid distinctio temporibus dolores repellat harum corporis sit numquam optio?', url:'http://www.dogs.com', rating:5, showInfo:true, timestamp:'2018.07.25-11:32:56'},
-      {id:321, title:'Article on Cats', desc:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima doloribus voluptate, aut modi magnam corrupti recusandae omnis odit, laborum, quia aliquid distinctio temporibus dolores repellat harum corporis sit numquam optio?', url:'http://www.cats.com', rating:3, showInfo:false, timestamp:'2018.07.26-08:09:10'}
-    ],
+    items: [],
     addBookmark,
     findById,
     findAndDelete,

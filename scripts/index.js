@@ -1,8 +1,11 @@
 'use strict';
 /* eslint-disable no-unused-vars, no-console */
-/* global $, bookmarker, store, Item */
+/* global $, bookmarker, store, api */
 
 $(document).ready(function() {
   bookmarker.bindEventListeners();
-  bookmarker.render();
+  api.getBookmarks((items) => {
+    items.forEach((item) => store.addBookmark(item));
+    bookmarker.render();
+  });
 });

@@ -3,7 +3,7 @@
 /* global $ */
 
 const api = (function() {
-  const BASE_URL = 'https://thinkful-list-api.herokuapp.com/clint/items';
+  const BASE_URL = 'https://thinkful-list-api.herokuapp.com/clint/bookmarks/';
 
   let getBookmarks = function(callback) {
     $.getJSON(BASE_URL, callback);

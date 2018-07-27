@@ -1,14 +1,16 @@
 'use strict';
 /* eslint-disable no-unused-vars, no-console */
-/* global $, store */
+/* global $, store, api */
 
 const bookmarker = (function() {
-  // $.fn.extend(function serializeJson(form) {
-  //   const formData = new FormData(form);
-  //   const o = {};
-  //   formData.forEach((val, name) => o[name] = val);
-  //   return JSON.stringify(o);
-  // });
+  $.fn.extend({
+    serializeJson: function() {
+      const formData = new FormData(this[0]);
+      const o = {};
+      formData.forEach((val, name) => o[name] = val);
+      return JSON.stringify(o);
+    }
+  });
 
   function generateBookmark(item) {  
     const stars = generateStars(item);
@@ -35,7 +37,7 @@ const bookmarker = (function() {
           <section class="bookmark-info" role="region">
             <p>${item.desc}</p>
             <a class="delete-button js-delete-button" href="#">delete</a>
-            <a class="js-visit-url" href="http://${item.url}">
+            <a class="js-visit-url" href="${item.url}" target="_blank">
               <div class="visit-button">
                 <span class="visit-url">visit site</span>
               </div>
@@ -77,13 +79,13 @@ const bookmarker = (function() {
         </header>
         <form id="add-bookmark">
           <label hidden for="bookmark-title">Title</label>
-          <input type="text" name="title" id="bookmark-title" placeholder="Title">
+          <input type="text" name="title" id="bookmark-title" placeholder="Title" required>
           <label hidden for="bookmark-url">URL</label>
-          <input type="url" name="url" id="bookmark-url" placeholder="URL">
+          <input type="url" name="url" id="bookmark-url" placeholder="URL" required>
           <label hidden for="bookmark-desc">Description</label>
           <input type="text" name="desc" id="bookmark-desc" placeholder="Description">
-          <select class="select-rating">
-            <option value="none">Rating</option>
+          <select name="rating" class="select-rating">
+            <option value="" disabled selected>Rating</option>
             <option value="5star">5 stars</option>
             <option value="4star">4 stars</option>
             <option value="3star">3 stars</option>
@@ -110,7 +112,7 @@ const bookmarker = (function() {
       </header>
       <form id="filter-form">
         <label hidden for="min-rating">minimum Rating</label>
-        <select class="select-rating">
+        <select name="rating" class="select-rating">
           <option value="1star">minimum rating</option>
           <option value="5star">5 stars</option>
           <option value="4star">4 stars</option>
@@ -119,7 +121,7 @@ const bookmarker = (function() {
           <option value="1star">1 star</option>
         </select>
         <label hidden for="select-sort">sort bookmarks</label>
-        <select class="select-rating">
+        <select name="sort" class="select-rating">
           <option value="newest">sort</option>
           <option value="alpha">alphabetical</option>
           <option value="rating">by rating</option>
@@ -148,9 +150,38 @@ const bookmarker = (function() {
   }
 
   function getItemIdFromElement(item) {
-    return Number($(item)
+    return $(item)
       .closest('li')
-      .attr('bookmark-id'));
+      .attr('bookmark-id');
+  }
+
+  function handleNewBookmarkSubmit() {
+    $('.add-panel').on('submit', '#add-bookmark', function(event) {
+      event.preventDefault();
+      const newData = $(event.target).serializeJson();
+      $(':input', '#add-bookmark')
+        .val('')
+        .removeAttr('selected');
+      api.createBookmark(newData, (newBookmark) => {
+        store.addBookmark(newBookmark);
+        render();
+      }, (error) => {
+        store.setErrorMsg(error);
+        render();
+      });
+    });
+  }
+
+  function handleDeleteClicked() {
+    $('.js-bookmarks').on('click', '.js-delete-button', function(event) {
+      event.preventDefault();
+      const id = getItemIdFromElement(event.target);
+      api.deleteBookmark(id, store.findAndDelete(id), (error) => {
+        store.setErrorMsg(error);
+        render();
+      });
+      render();
+    });
   }
 
   function handleBookmarkToggle() {
@@ -176,6 +207,8 @@ const bookmarker = (function() {
   }
   
   function bindEventListeners() {
+    handleNewBookmarkSubmit();
+    handleDeleteClicked();
     handleBookmarkToggle();
     handleAddPanelToggle();
     handleFilterPanelToggle();
