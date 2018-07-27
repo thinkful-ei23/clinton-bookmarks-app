@@ -128,6 +128,26 @@ const bookmarker = (function() {
       break;
     }
 
+    let selectAlpha, selectRating, selectNewest, selectOldest, selectNone;
+    selectAlpha = selectRating = selectNewest = selectOldest = selectNone = '';
+    switch(store.sortMethod) {
+    case 'alpha':
+      selectAlpha = 'selected';
+      break;
+    case 'rating':
+      selectRating = 'selected';
+      break;
+    case 'newest':
+      selectNewest = 'selected';
+      break;
+    case 'oldest':
+      selectOldest = 'selected';
+      break;
+    case '':
+      selectNone = 'selected';
+      break;
+    }
+
     if (store.filterExpanded) {
       return `
       <button aria-label="filter bookmarks" class="filter-header js-filter" style="cursor: pointer;" tabindex="0">
@@ -146,11 +166,11 @@ const bookmarker = (function() {
         </select>
         <label for="select-sort">sort bookmarks by:</label>
         <select name="sort" id="select-sort" class="select-rating js-select-sort">
-          <option value="newest">select</option>
-          <option value="alpha">alphabetical</option>
-          <option value="rating">rating</option>
-          <option value="newest">newest first</option>
-          <option value="oldest">oldest first</option>
+          <option value="" ${selectNone}>select</option>
+          <option value="alpha" ${selectAlpha}>alphabetical</option>
+          <option value="rating" ${selectRating}>rating</option>
+          <option value="newest" ${selectNewest}>newest first</option>
+          <option value="oldest" ${selectOldest}>oldest first</option>
         </select>
       </form>
       `;
@@ -172,6 +192,16 @@ const bookmarker = (function() {
 
     if (store.searchTerm) {
       items = items.filter(item => item.title.toLowerCase().includes(store.searchTerm));
+    }
+
+    if (store.sortMethod === 'rating') {
+      items = store.sortByRating(items);
+    } else if (store.sortMethod === 'alpha') {
+      items = store.sortByAlpha(items);
+    } else if (store.sortMethod === '' || store.sortMethod === 'newest') {
+      items = store.sortByNewest(items);
+    }else if (store.sortMethod === 'oldest') {
+      items = store.sortByOldest(items);
     }
 
     const bookmarksString = generateBookmarksString(items);
@@ -243,6 +273,14 @@ const bookmarker = (function() {
     });
   }
 
+  function handleSortMethodSelect() {
+    $('.js-filter-panel').on('change', '.js-select-sort', function() {
+      const method = $('.js-select-sort').val();
+      store.sortMethod = method;
+      render();
+    });
+  }
+
   function handleSearchInput() {
     $('.js-search-bar').on('keyup', event => {
       const val = $(event.currentTarget).val();
@@ -258,6 +296,7 @@ const bookmarker = (function() {
     handleAddPanelToggle();
     handleFilterPanelToggle();
     handleRatingFilterSelect();
+    handleSortMethodSelect();
     handleSearchInput();
   }
 
