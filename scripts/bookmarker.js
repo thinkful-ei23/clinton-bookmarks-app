@@ -287,6 +287,7 @@ const bookmarker = (function() {
       store.searchTerm = val;
       render();
     });
+    $('.js-search').submit(event => event.preventDefault());
   }
   
   function bindEventListeners() {
