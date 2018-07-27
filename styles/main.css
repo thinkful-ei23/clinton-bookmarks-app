@@ -5,7 +5,7 @@
 
 body {
   background-color: #e8e9eb;
-  height: 100%;
+  height: 100vh;
   overflow: hidden;
 }
 
@@ -20,33 +20,44 @@ h1 {
 }
 
 main {
+  height: 100%;
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 124px;
+  position: relative;
 }
 
 aside {
   background-color: #ecdecc;
-  /* font-size: 0px; */
 }
 
-.no-gap {
-  font-size: 0px;
+* input:active, input:focus {
+  outline: 0;
+}
+
+* button:active, button:focus {
+  outline: 0;
+}
+
+header {
+  position: fixed;
+  top: 0px;
+  width: 100%;
 }
 
 .banner {
   background-color: #db7676;
   height: 80px;
-  left: 0px;
-  position: fixed;
-  top: 0px;
+  position: relative;
+  text-align: center;
   width: 100%;
 }
 
 .search {
   background-color: white;
   height: 44px;
-  margin-top: 80px;
+  width: 100%;
 }
 
 .search form {
@@ -162,6 +173,10 @@ aside {
   left: -1px;
   overflow: hidden;
   position: absolute;
+}
+
+.make-scroll {
+  overflow: auto;
 }
 
 .bookmarks {
