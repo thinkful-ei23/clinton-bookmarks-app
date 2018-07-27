@@ -163,28 +163,15 @@ const bookmarker = (function() {
     }
   }
 
-  // function (item) {
-  //   switch (item.rating) {
-  //   case 5:
-  //     return '5star';
-  //   case 4:
-  //     return '4star';
-  //   case 3:
-  //     return '3star';
-  //   case 2:
-  //     return '2star';
-  //   case 1:
-  //     return '1star';
-  //   default:
-  //     return 'no-star';
-  //   }
-  // }
-
   function render() {
     let items = store.items;
 
     if (store.minRating > 1) {
       items = items.filter(item => item.rating >= store.minRating);
+    }
+
+    if (store.searchTerm) {
+      items = items.filter(item => item.title.toLowerCase().includes(store.searchTerm));
     }
 
     const bookmarksString = generateBookmarksString(items);
@@ -255,6 +242,14 @@ const bookmarker = (function() {
       render();
     });
   }
+
+  function handleSearchInput() {
+    $('.js-search-bar').on('keyup', event => {
+      const val = $(event.currentTarget).val();
+      store.searchTerm = val;
+      render();
+    });
+  }
   
   function bindEventListeners() {
     handleNewBookmarkSubmit();
@@ -263,6 +258,7 @@ const bookmarker = (function() {
     handleAddPanelToggle();
     handleFilterPanelToggle();
     handleRatingFilterSelect();
+    handleSearchInput();
   }
 
   return { render, bindEventListeners };

@@ -19,10 +19,6 @@ const store = (function() {
     Object.assign(this.items[itemIndex], newData);
   };
 
-  const setSearchTerm = function(string) {
-    this.searchTerm = string;
-  };
-
   const toggleNewExpanded = function() {
     this.newExpanded = !this.newExpanded;
     if (this.newExpanded === true) {
@@ -42,10 +38,6 @@ const store = (function() {
     item.showInfo = !item.showInfo;
   };
 
-  const setMinRating = function(num) {
-    this.minRating = num;
-  };
-
   const setErrorMsg = function(error) {
     this.errorMsg = JSON.parse(error.responseText).message;
   };
@@ -63,11 +55,9 @@ const store = (function() {
     findById,
     findAndDelete,
     findAndUpdate,
-    setSearchTerm,
     toggleNewExpanded,
     toggleFilterExpanded,
     toggleBookmarkExpanded,
-    setMinRating,
     setErrorMsg
   };
 }());
